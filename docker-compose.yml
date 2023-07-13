@@ -17,20 +17,20 @@ services:
     build: 
       context: ../travel_note_frontend
       dockerfile: Dockerfile
-      target: development
+      target: ${SERVER_ENV}
     volumes:
       - ../travel_note_frontend:/app
       - /app/node_modules
     ports:
       - 5001:5001
-    environment: 
-      - CHOKIDAR_USEPOLLING=true
+    env_file:
+      - .env
 
   travel_note_backend:
     build: 
       context: ../travel_note_backend
       dockerfile: Dockerfile
-      target: development
+      target: ${SERVER_ENV}
     volumes:
       - ../travel_note_backend:/app
       - /app/node_modules
