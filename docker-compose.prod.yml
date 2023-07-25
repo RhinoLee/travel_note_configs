@@ -12,7 +12,6 @@ services:
       - 443:80
     depends_on:
       - travel_note_frontend
-      - travel_note_backend
   travel_note_frontend:
     build: 
       context: ../travel_note_frontend
@@ -23,15 +22,24 @@ services:
       - /app/node_modules
     ports:
       - 5001:5001
+    depends_on:
+      - travel_note_backend
 
   travel_note_backend:
     build: 
       context: ../travel_note_backend
       dockerfile: Dockerfile
       target: production
+    environment:
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_HOST=${MYSQL_HOST}
     volumes:
       - ../travel_note_backend:/app
       - /app/node_modules
+    depends_on:
+      - mysql
   
   mysql:
     image: mysql:8.0

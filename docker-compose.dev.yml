@@ -9,7 +9,7 @@ services:
       - ../localhost.crt:/etc/nginx/ssl/localhost.crt
       - ../localhost.key:/etc/nginx/ssl/localhost.key
     ports:
-      - 5003:80
+      - 5003:443
     depends_on:
       - travel_note_frontend
       - travel_note_backend
@@ -29,6 +29,11 @@ services:
       context: ../travel_note_backend
       dockerfile: Dockerfile
       target: development
+    environment:
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_HOST=${MYSQL_HOST}
     volumes:
       - ../travel_note_backend:/app
       - /app/node_modules
