@@ -17,9 +17,6 @@ services:
       context: ../travel_note_frontend
       dockerfile: Dockerfile
       target: production
-    volumes:
-      - ../travel_note_frontend:/app
-      - /app/node_modules
     ports:
       - 5001:5001
     depends_on:
@@ -35,9 +32,6 @@ services:
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
       - MYSQL_DATABASE=${MYSQL_DATABASE}
       - MYSQL_HOST=${MYSQL_HOST}
-    volumes:
-      - ../travel_note_backend:/app
-      - /app/node_modules
     depends_on:
       - mysql
   
