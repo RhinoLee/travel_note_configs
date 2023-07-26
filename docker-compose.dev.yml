@@ -23,6 +23,8 @@ services:
       - /app/node_modules
     ports:
       - 5001:5001
+    depends_on:
+      - travel_note_backend
 
   travel_note_backend:
     build: 
@@ -37,11 +39,17 @@ services:
     volumes:
       - ../travel_note_backend:/app
       - /app/node_modules
+    depends_on:
+      - mysql
   
   mysql:
     image: mysql:8.0
     command: --default-authentication-plugin=mysql_native_password
     restart: always
+    healthcheck:
+      test: "mysqladmin ping -h localhost -u $$MYSQL_USER --password=$$MYSQL_PASSWORD"
+      timeout: 20s
+      retries: 10
     env_file:
       - .env
     volumes:
