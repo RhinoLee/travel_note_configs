@@ -9,7 +9,7 @@ services:
       - /etc/letsencrypt/live/rhinoman.com.tw/fullchain.pem:/etc/nginx/ssl/localhost.crt
       - /etc/letsencrypt/live/rhinoman.com.tw/privkey.pem:/etc/nginx/ssl/localhost.key
     ports:
-      - 443:80
+      - 443:443
     depends_on:
       - travel_note_frontend
   travel_note_frontend:
