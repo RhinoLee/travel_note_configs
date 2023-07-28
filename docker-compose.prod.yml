@@ -32,6 +32,10 @@ services:
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
       - MYSQL_DATABASE=${MYSQL_DATABASE}
       - MYSQL_HOST=${MYSQL_HOST}
+    volumes:
+      - type: bind
+        source: ./config/keys
+        target: /app/config/keys
     depends_on:
       - mysql
   

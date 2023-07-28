@@ -20,6 +20,7 @@ services:
       target: development
     volumes:
       - ../travel_note_frontend:/app
+      - /app/node_modules
     ports:
       - 5001:5001
     depends_on:
@@ -36,7 +37,11 @@ services:
       - MYSQL_DATABASE=${MYSQL_DATABASE}
       - MYSQL_HOST=${MYSQL_HOST}
     volumes:
+      - type: bind
+        source: ./config/keys
+        target: /app/config/keys
       - ../travel_note_backend:/app
+      - /app/node_modules
     depends_on:
       - mysql
   
