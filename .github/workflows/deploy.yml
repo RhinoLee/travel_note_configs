@@ -19,9 +19,21 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
+      - name: Setup keys
+        run: |
+          mkdir -p ./config/keys
+          echo "${{ secrets.JWT_PRIVATE_KEY }}" > ./config/keys/private.key
+          echo "${{ secrets.JWT_PUBLIC_KEY }}" > ./config/keys/public.key
+
+      - name: Copy keys to server
+        run: |
+          scp ./config/keys/* terry998877terry@34.80.219.26:/home/travel_note/travel_note_configs/config/keys
+
       - name: Deploy to server
         run: |
           ssh -o StrictHostKeyChecking=no -T terry998877terry@34.80.219.26 \
-          "cd /home/travel_note/travel_note_configs && \
+          "cd /home/travel_note/travel_note_backend/config && \
+          mkdir -p ./keys && \
+          cd /home/travel_note/travel_note_configs && \
           git pull && \
           sudo docker-compose -f docker-compose.prod.yml up --build -d"
