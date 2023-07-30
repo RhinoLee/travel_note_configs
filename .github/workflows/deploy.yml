@@ -22,7 +22,9 @@ jobs:
       - name: Deploy to server
         run: |
           ssh -o StrictHostKeyChecking=no -T terry998877terry@34.80.219.26 \
-          "cd /home/travel_note/travel_note_backend/config && \
+          "cd /home/travel_note/travel_note_frontend
+          echo 'VITE_APP_GOOGLE_MAPS_API_KEY=${{ secrets.GOOGLE_MAPS_API_KEY }}' > ./.env && \
+          cd /home/travel_note/travel_note_backend/config && \
           mkdir -p ./keys && \
           cd /home/travel_note/travel_note_configs && \
           mkdir -p ./config/keys && \
