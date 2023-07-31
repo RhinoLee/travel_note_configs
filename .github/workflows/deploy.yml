@@ -30,5 +30,7 @@ jobs:
           mkdir -p ./config/keys && \
           echo '${{ secrets.JWT_PRIVATE_KEY }}' > ./config/keys/private.key && \
           echo '${{ secrets.JWT_PUBLIC_KEY }}' > ./config/keys/public.key && \
+          echo '${{ secrets.OPENAI_API_KEY }}' > ./config/keys/openai_api.key && \
+          echo '${{ secrets.OPENAI_ORG_KEY }}' > ./config/keys/openai_org.key && \
           git pull && \
           sudo docker-compose -f docker-compose.prod.yml up --build -d"
