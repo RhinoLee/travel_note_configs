@@ -30,7 +30,7 @@ jobs:
           mkdir -p ./config/keys && \
           echo '${{ secrets.JWT_PRIVATE_KEY }}' > ./config/keys/private.key && \
           echo '${{ secrets.JWT_PUBLIC_KEY }}' > ./config/keys/public.key && \
-          echo -n '${{ secrets.GCP_STORAGE_JSON }}' > ./config/keys/gcp_storage.json && \
+          echo -n '${{ secrets.GCP_STORAGE_JSON }}' | base64 --decode > ./config/keys/gcp_storage.json && \
           echo -n '${{ secrets.GCP_BUCKET_NAME }}' > ./config/keys/gcp_bucket_name.key && \
           echo -n '${{ secrets.OPENAI_API_KEY }}' > ./config/keys/openai_api.key && \
           echo -n '${{ secrets.OPENAI_ORG_KEY }}' > ./config/keys/openai_org.key && \
