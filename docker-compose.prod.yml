@@ -36,6 +36,7 @@ services:
       - type: bind
         source: ./config/keys
         target: /app/config/keys
+    command: ["./wait-for", "mysql:3306", "--", "node", "migration.js", "up"]
     depends_on:
       - mysql
   
