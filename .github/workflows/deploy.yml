@@ -36,6 +36,7 @@ jobs:
           echo -n '${{ secrets.OPENAI_ORG_KEY }}' > ./config/keys/openai_org.key && \
           echo -n '${{ secrets.GOOGLE_CLIENT_ID }}' > ./config/keys/google_client_id.key && \
           echo -n '${{ secrets.GOOGLE_CLIENT_SECRET }}' > ./config/keys/google_client_secret.key && \
+          echo -n '${{ secrets.GOOGLE_MAPS_API_KEY }}' > ./config/keys/google_maps_api.key && \
           git pull && \
           sudo docker-compose -f docker-compose.prod.yml down && \
           sudo docker-compose -f docker-compose.prod.yml up --build -d && \
