@@ -6,6 +6,7 @@ services:
       - .env
     volumes:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx.conf.template:/etc/nginx/conf.d/default.conf.template
       - /etc/letsencrypt/live/rhinoman.com.tw/fullchain.pem:/etc/nginx/ssl/localhost.crt
       - /etc/letsencrypt/live/rhinoman.com.tw/privkey.pem:/etc/nginx/ssl/localhost.key
     ports:
